@@ -20,9 +20,9 @@ def read_table(filename):
     with open(filename, newline='') as csvfile:
         table = {}
         table_reader = csv.reader(csvfile, delimiter=',')
-        next(table_reader) # skip first row, assuming format
+        next(table_reader) # skip first row, assume it is row labels
         for row in table_reader:
-            if not is_codon(row[-1]):
+            if not is_codon(row[-1]) or not is_codon(row[0]):
                 continue
             table[row[0]] = row[-1]
         return table
